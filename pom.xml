@@ -28,6 +28,20 @@
             <version>3.2.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- The aws-java-sdk library provides a Java interface to various Amazon Web Services, including Amazon S3. However, the hadoop-aws library is specifically designed to integrate the Hadoop ecosystem with Amazon S3.
+        So, while you can use the aws-java-sdk library to access Amazon S3 data in a Spark application, you would need to write additional code to make use of Hadoop's FileSystem interface. In contrast, by including the hadoop-aws library as a dependency, you can directly access Amazon S3 data using Hadoop's FileSystem interface in your Spark application.
+        Therefore, if you are using Spark and you want to access Amazon S3 data, it is generally recommended to include the hadoop-aws library as a dependency in your pom.xml file, in addition to the aws-java-sdk library, to take advantage of Hadoop's FileSystem interface for accessing data stored in Amazon S3.
+        -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-aws</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.11.847</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -46,7 +60,22 @@
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>aws repo</id>
+            <url>https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
 </project>
 
 
